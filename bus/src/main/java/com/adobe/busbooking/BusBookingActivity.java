@@ -25,6 +25,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -42,6 +43,7 @@ public class BusBookingActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_bus_booking);
         setUpToolBar();
         mTextGoingTo =  findViewById(R.id.text_going_to);
@@ -82,6 +84,7 @@ public class BusBookingActivity extends AppCompatActivity {
 
         setSource("San Francisco");
         setDest("Las Vegas");
+
     }
 
 

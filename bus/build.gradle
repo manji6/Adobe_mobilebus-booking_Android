@@ -13,6 +13,21 @@ android {
         versionName "1.0"
     }
 
+    // Added read ROOT/gradle.properties.
+    buildTypes {
+        debug {
+            // format: '型', 'プロジェクト内で参照できる Key名', '参照元の Key名'
+            buildConfigField 'String', 'ADOBELAUNCH_CONFIGUREID', project.ADOBELAUNCH_CONFIGUREID
+            // プロジェクト内で BuildConfig.key名 で参照できるようになる
+            // e.g. BuildConfig.API_KEY
+
+        }
+
+        release {
+            buildConfigField 'String', 'ADOBELAUNCH_CONFIGUREID', project.ADOBELAUNCH_CONFIGUREID
+        }
+    }
+
 }
 
 dependencies {
