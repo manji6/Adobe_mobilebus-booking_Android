@@ -1,6 +1,8 @@
-This application has developed in order to demonstrate the travel app concept having following features.
+# 使い方
 
-1. Bus Booking Engine page.
-2. Bus and Traveller details page.
-3. Offers card on Bus Booking Engine page.
-4. Offer details page.
+1. rootディレクトリにgradle.propertiesファイルを設置
+2. 必要な定義値を設定(あとで説明)
+
+
+# 必要な定義値について
+- ADOBELAUNCH_CONFIGUREID：Launch by Adobe の Environment File ID
