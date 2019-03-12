@@ -32,6 +32,10 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.adobe.marketing.mobile.Analytics;
+import com.adobe.marketing.mobile.MobileCore;
+
+
 /**
  * This activity class is responsible to show booking engine page and offer card.
  */
@@ -84,6 +88,8 @@ public class BusBookingActivity extends AppCompatActivity {
 
         setSource("San Francisco");
         setDest("Las Vegas");
+
+        MobileCore.trackState("busbooking:index",null);
 
     }
 
@@ -229,11 +235,16 @@ public class BusBookingActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        MobileCore.setApplication(getApplication());
+        MobileCore.lifecycleStart(null);
     }
 
     @Override
     protected void onPause() {
         super.onPause();
+
+        //Stop ACP SDK lifecycle tracking
+        MobileCore.lifecyclePause();
     }
 
     private void showConfirmationDialog() {

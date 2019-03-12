@@ -23,12 +23,17 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 
+import com.adobe.marketing.mobile.MobileCore;
+
 public class SampleFragmentActivity extends FragmentActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sample_fragment);
         setupOfferFragment();
+
+        MobileCore.trackState("busbooking:offerFragment",null);
+
     }
 
     private void setupOfferFragment() {
@@ -37,4 +42,21 @@ public class SampleFragmentActivity extends FragmentActivity {
         transaction.replace(R.id.container_body, newFragment);
         transaction.commit();
     }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+        MobileCore.setApplication(getApplication());
+        MobileCore.lifecycleStart(null);
+
+    }
+
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        //Stop ACP SDK lifecycle tracking
+        MobileCore.lifecyclePause();
+    }
+
 }

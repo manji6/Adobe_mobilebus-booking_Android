@@ -22,6 +22,8 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
+import com.adobe.marketing.mobile.MobileCore;
+
 
 //import com.adobe.marketing.mobile.MobileCore;
 
@@ -35,6 +37,10 @@ public class SecondActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_second);
         setUpToolBar();
+
+
+        MobileCore.trackState("busbooking:second",null);
+
     }
 
     private void setUpToolBar() {
@@ -53,11 +59,18 @@ public class SecondActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+
+        MobileCore.setApplication(getApplication());
+        MobileCore.lifecycleStart(null);
+
     }
 
     @Override
     protected void onPause() {
         super.onPause();
+
+        //Stop ACP SDK lifecycle tracking
+        MobileCore.lifecyclePause();
     }
 }
 

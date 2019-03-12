@@ -26,6 +26,9 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.adobe.marketing.mobile.MobileCore;
+import com.adobe.target.mobile.TargetVEC;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -51,6 +54,9 @@ public class OfferDetailsActivity extends AppCompatActivity {
 
         imagePresentView = this.findViewById(R.id.image_present);
         currentLayout = this.findViewById(R.id.offer_layout);
+
+        MobileCore.trackState("busbooking:offerdetail",null);
+
     }
 
     private void setUpToolBar() {
@@ -69,11 +75,16 @@ public class OfferDetailsActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         setSurpriseClickListener();
+        MobileCore.setApplication(getApplication());
+        MobileCore.lifecycleStart(null);
+
     }
 
     @Override
     protected void onPause() {
         super.onPause();
+        //Stop ACP SDK lifecycle tracking
+        MobileCore.lifecyclePause();
     }
 
     private void setSurpriseClickListener() {

@@ -21,12 +21,55 @@ import android.app.Application;
 import android.content.Context;
 import android.support.multidex.MultiDex;
 import android.util.Log;
+import com.adobe.marketing.mobile.AdobeCallback;
+import com.adobe.marketing.mobile.Analytics;
+import com.adobe.marketing.mobile.Identity;
+import com.adobe.marketing.mobile.InvalidInitException;
+import com.adobe.marketing.mobile.Lifecycle;
+import com.adobe.marketing.mobile.LoggingMode;
+import com.adobe.marketing.mobile.MobileCore;
+import com.adobe.marketing.mobile.Signal;
+import com.adobe.marketing.mobile.Target;
+import com.adobe.marketing.mobile.UserProfile;
+import com.adobe.target.mobile.TargetVEC;
 
 public class DemoApplication extends Application {
 
     @Override
     public void onCreate() {
+
         super.onCreate();
+
+        MobileCore.setApplication(this);
+        MobileCore.setLogLevel(LoggingMode.DEBUG);
+
+        try{
+            TargetVEC.registerExtension(this);
+            Target.registerExtension();
+            Analytics.registerExtension();
+            UserProfile.registerExtension();
+            Identity.registerExtension();
+            Lifecycle.registerExtension();
+            Signal.registerExtension();
+            MobileCore.start(new AdobeCallback () {
+                @Override
+                public void call(Object o) {
+                    MobileCore.configureWithAppID(BuildConfig.ADOBELAUNCH_CONFIGUREID);
+                }
+            });
+
+         }catch(InvalidInitException e){
+
+        }
+        TargetVEC.registerExtension(this);
+
+    }
+
+    public void onResume() {
+    }
+
+    public void onPause() {
+
     }
 
     @Override
